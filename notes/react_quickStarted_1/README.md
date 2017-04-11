@@ -3,6 +3,7 @@
 ### 1.  jsx
 - 자바스크립트를 확장 시켜서 만들었다.
 
+React
 ~~~javascript
 class MyBlog extends React.Component {
   constructor() {
@@ -54,8 +55,8 @@ ReactDOM.render(
 );
 ~~~
 
-
-~~~javascript
+html
+~~~html
 <html> 
   <head>
   </head>
@@ -70,7 +71,7 @@ ReactDOM.render(
 ~~~
 
 
-- JSX is an Expression Too
+#### JSX is an Expression Too
 - 컴파일이 끝나면 JSX 표현식이 일반 JavaScript 객체가됩니다. 즉, if 문과 for 루프에서 JSX를 사용할 수 있고, 변수에 할당하고, 인수로 받아 들여 함수에서 반환 할 수 있습니다.
 
 
@@ -103,7 +104,7 @@ element,
 
 - Specifying Attributes with JSX (속성 지정 하기)
 - `const element = <img src={user.avatarUrl}></img>;`와 같이 {}을 통해 속성을 지정 할수 있다.
-- tag의 끝은 꼭 지정해 주어야 한다. "<img/>"  or "<img></img>"
+- tag의 끝은 꼭 지정해 주어야 한다. `<img/>`  or `<img></img>`
 
 
 ~~~javascript
