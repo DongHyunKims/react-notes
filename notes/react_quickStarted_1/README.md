@@ -220,7 +220,7 @@ ReactDOM.render(
 1. 우리는 `ReactDOM.render()`을 `<Welcome name="Sara" />` element와 함께 부른다.
 2. React는 Welcome component를 `{name: 'Sara'}` props와 함께 부른다.
 3. Welcome component는 `<h1>Hello, Sara</h1>`element를 반환한다. 
-4. React DOM은 효과적으로 <h1>Hello, Sara</h1>에 맞추어 DOM을 업데이트 한다.
+4. React DOM은 효과적으로 `<h1>Hello, Sara</h1>`에 맞추어 DOM을 업데이트 한다.
 
 주의
 > component의 이름은 항상 맨 앞글자는 대문자로 작성 해야한다.
