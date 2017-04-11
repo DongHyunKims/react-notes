@@ -18,9 +18,9 @@ const TabPanel = function(props){
     return <div className="tab_panel">
             <h3>{content.title}</h3>
             <img src={content.imgurl}/>
-            <p>
+            <ul>
                 {contentList}
-            </p>
+            </ul>
            </div>;
 };
 
@@ -36,12 +36,10 @@ class Tab extends React.Component{
 
 
     tabClickHandler(event){
-
             let currentEventTarget = event.target;
-            let divClass = currentEventTarget.className;
             let divId = currentEventTarget.id;
             let idx = Number(divId.split("_")[1]);
-            let allDom = document.querySelectorAll("."+divClass);
+            let allDom = document.querySelectorAll(".tab_button");
             allDom.forEach((element)=>{
                 element.style.backgroundColor = "white";
             });
@@ -51,11 +49,15 @@ class Tab extends React.Component{
             this.setState({content : this.props.data[idx]});
     }
 
+    componentDidMount(){
+        let selectDom = document.querySelector(".tab_button");
+        selectDom.style.backgroundColor = "#79F8BB";
+    }
 
 
 
         render(){
-        let buttonName = ["name1", "name2", "name3"];
+        let buttonName = this.props.titleList;
         let tabButtonJSX = buttonName.map((val,key)=>{
             let tabId = "tabButton_" + key;
             return (<TabButton key={key} tabName={val} tabId={tabId} clickHandler={this.tabClickHandler} />);

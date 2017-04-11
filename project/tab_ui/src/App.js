@@ -13,27 +13,43 @@ class App extends Component {
 
     constructor(props){
         super(props);
-        this.state = {data : null};
+        this.state = {data : null, titleList : null};
+
     }
 
 
 
     componentDidMount(){
-        axios("../data/newsData.json").then((res)=>{
-            console.log("res",res);
-            const data = res.data;
-            this.setState({ data });
-        });
+        // axios("../data/newsData.json").then((res)=>{
+        //     console.log("res",res);
+        //     const data = res.data;
+        //     this.setState({ data });
+        // });
+        utility.runAjax(this.reqListener.bind(this),"GET","../data/newsData.json");
     }
 
+    reqListener(res){
+        console.log(res);
+        let jsonData = JSON.parse(res.currentTarget.responseText);
+        let titleList = this.getTitlList(jsonData);
+        this.setState({ data:  jsonData, titleList: titleList });
+    }
 
+    getTitlList(data){
+        let titleArr = [];
+        data.forEach((val)=>{
+            titleArr.push(val.title);
+        });
+       return titleArr;
+    }
 
-
-  render() {
+    render() {
     let data = this.state.data;
+    let titleList = this.state.titleList;
+
     let renderingDom = <h3>Loading</h3>;
     if(data){
-        renderingDom =  <Tab data={data}/>
+        renderingDom =  <Tab data={data} titleList={titleList} />
     }
     return (
       <div className="App">
