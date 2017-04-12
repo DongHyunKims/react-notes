@@ -30,7 +30,7 @@ class App extends Component {
 
 
 
-        
+
     }
     //universial rendering!!!! server side rendering을 사용한다.
     reqListener(res){
@@ -44,11 +44,11 @@ class App extends Component {
         let titleArr = [];
         data.forEach((val)=>{
             titleArr.push(val.title);
-        });
-       return titleArr;
-    }
+    });
+    return titleArr;
+}
 
-    render() {
+render() {
     let data = this.state.data;
     let titleList = this.state.titleList;
 
