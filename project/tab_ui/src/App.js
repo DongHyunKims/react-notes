@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Tab from "./Tab";
 import utility from './utility';
-import axios from "axios";
+//import axios from "axios";
+//fetch
 
 
 
@@ -18,7 +19,7 @@ class App extends Component {
     }
 
 
-
+    // will 과 did의 차이가 많이 없다, setState 만 will 과 did의 동작을 모아 놓고 실행한다.
     componentDidMount(){
         // axios("../data/newsData.json").then((res)=>{
         //     console.log("res",res);
@@ -26,10 +27,14 @@ class App extends Component {
         //     this.setState({ data });
         // });
         utility.runAjax(this.reqListener.bind(this),"GET","../data/newsData.json");
-    }
 
+
+
+        
+    }
+    //universial rendering!!!! server side rendering을 사용한다.
     reqListener(res){
-        console.log(res);
+        //console.log(res);
         let jsonData = JSON.parse(res.currentTarget.responseText);
         let titleList = this.getTitlList(jsonData);
         this.setState({ data:  jsonData, titleList: titleList });

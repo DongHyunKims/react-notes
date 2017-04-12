@@ -6,11 +6,31 @@ import utility from './utility';
 
 
 const TabButton = function(props) {
-    return <div className="tab_button" id={props.tabId} onClick={props.clickHandler} >{ props.tabName }</div>
+
+    let styles = {};
+
+    let key = Number(props.tabId.split("_")[1]);
+    let selectedKey = Number(props.selectedKey);
+    //
+    // console.log("key",key);
+    //
+    // console.log("selectedKey",selectedKey);
+    if(key === selectedKey){
+        styles = {
+            backgroundColor: "#79F8BB"
+        }
+    }else{
+        styles = {
+            backgroundColor: "white"
+        }
+    }
+
+    return <div className="tab_button" style={styles} id={props.tabId} onClick={props.onClick} >{ props.tabName }</div>
 };
 
 const TabPanel = function(props){
     let content = props.content;
+
     let contentList = content.newslist.map((value,idx)=>{
         return (<p key={idx}>{value}</p>);
     });
@@ -29,38 +49,28 @@ class Tab extends React.Component{
         super(props);
         this.state = {
             content : this.props.data[0],
+            selectedKey : 0,
         };
         this.tabClickHandler = this.tabClickHandler.bind(this);
     }
 
 
+    // handler에서는 state 조작만 해주면 된다.
 
     tabClickHandler(event){
-            let currentEventTarget = event.target;
-            let divId = currentEventTarget.id;
-            let idx = Number(divId.split("_")[1]);
-            let allDom = document.querySelectorAll(".tab_button");
-            allDom.forEach((element)=>{
-                element.style.backgroundColor = "white";
-            });
-            let selectDom = utility.$selector("#"+divId);
-            selectDom.style.backgroundColor = "#79F8BB";
-
-            this.setState({content : this.props.data[idx]});
+        let currentEventTarget = event.target;
+        let divId = currentEventTarget.id;
+        let selectedKey = Number(divId.split("_")[1]);
+        //console.log("selectedKey",selectedKey);
+        this.setState({content : this.props.data[selectedKey] , selectedKey : selectedKey});
     }
-
-    componentDidMount(){
-        let selectDom = document.querySelector(".tab_button");
-        selectDom.style.backgroundColor = "#79F8BB";
-    }
-
-
 
         render(){
         let buttonName = this.props.titleList;
-        let tabButtonJSX = buttonName.map((val,key)=>{
+        let selectedKey = this.state.selectedKey;
+        let tabButton = buttonName.map((val,key)=>{
             let tabId = "tabButton_" + key;
-            return (<TabButton key={key} tabName={val} tabId={tabId} clickHandler={this.tabClickHandler} />);
+            return (<TabButton key={key} tabName={val} tabId={tabId} onClick={this.tabClickHandler} selectedKey={selectedKey} />);
         });
 
         //this.setState({state : this.state.data[0]});
@@ -72,10 +82,9 @@ class Tab extends React.Component{
         return (
             <div className="tab_scope">
             <div className="tab_btn_scope">
-                {tabButtonJSX}
+                {tabButton}
             </div>
                 <TabPanel content={content}/>
-
             </div>
 
         )
