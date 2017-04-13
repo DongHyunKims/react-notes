@@ -47,6 +47,7 @@ class Tab extends React.Component{
             content : this.props.data[0],
             selectedKey : 0,
         };
+
         //this.tabClickHandler = this.tabClickHandler.bind(this);
     }
 
@@ -59,6 +60,9 @@ class Tab extends React.Component{
     }
 
         render(){
+
+
+
         let buttonName = this.props.titleList;
         let selectedKey = this.state.selectedKey;
         let tabButton = buttonName.map((val,key)=>{
