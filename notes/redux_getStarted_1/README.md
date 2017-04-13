@@ -1,4 +1,4 @@
-## Redux Get Started
+## Redux Getting Started
 
 ### 1. action 
 - 액션은 application에서 store로 보내는 객체 형태의 데이터 이다. 
@@ -137,8 +137,8 @@ export function setVisibilityFilter(filter) {
 ~~~
 
 주의!
-> 인수들을 변경(mutate)하기;
-> API 호출이나 라우팅 전환같은 사이드이펙트를 일으키기;
+> 인수들을 변경(mutate)하기;<br>
+> API 호출이나 라우팅 전환같은 사이드이펙트를 일으키기;<br>
 > Date.now()나 Math.random() 같이 순수하지 않은 함수를 호출하기.
 
 - 인수가 주어지면 state 값을 새롭게 만들어 반환 하는 것이 중요하다. (immutable)
