@@ -3,6 +3,9 @@
  */
 import React, { Component } from 'react';
 import utility from './utility';
+import { connect } from 'react-redux';
+import { getData } from './actions';
+
 
 
 const TabButton = function(props) {
@@ -44,32 +47,23 @@ class Tab extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            content : this.props.data[0],
-            selectedKey : 0,
-        };
-
-        //this.tabClickHandler = this.tabClickHandler.bind(this);
+            isInit : true,
+        }
     }
 
 
-    // handler에서는 state 조작만 해주면 된다.
-    tabClickHandler(key){
-        let selectedKey =key;
-        //console.log("selectedKey",selectedKey);
-        this.setState({content : this.props.data[selectedKey] , selectedKey : selectedKey});
-    }
 
-        render(){
+    render(){
 
-
-
+        let state = this.props.state;
         let buttonName = this.props.titleList;
-        let selectedKey = this.state.selectedKey;
+        let selectedKey = state.selectedKey;
+
         let tabButton = buttonName.map((val,key)=>{
             let tabId = "tabButton_" + key;
-            return (<TabButton key={key} tabName={val} tabId={tabId} onClick={this.tabClickHandler.bind(this,key)} selectedKey={selectedKey} currentKey={key} />);
+            return (<TabButton key={key} tabName={val} tabId={tabId} onClick={this.props.tabClickHandler.bind(this,key)} selectedKey={selectedKey} currentKey={key} />);
         });
-        let content = this.state.content;
+        let content = state.content;
 
         return (
             <div className="tab_scope">
@@ -84,5 +78,27 @@ class Tab extends React.Component{
 
 }
 
+function mapStateToProps(state){
+    return {
+        state : state,
+    };
+}
 
-export default Tab;
+
+function mapDispatchToProps(dispatch){
+    return {
+        tabClickHandler(key){
+            //console.log("selectedKey",selectedKey);
+            dispatch(getData(key));
+        },
+
+    };
+
+}
+
+const TabContainer = connect(mapStateToProps,mapDispatchToProps)(Tab);
+
+
+
+
+export default TabContainer;
