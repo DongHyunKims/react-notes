@@ -43,8 +43,7 @@ class App extends Component {
 
 render() {
     // props를 통해 바로 사용 가능하다.
-    let state = this.props.state;
-    let data = state.data;
+    let {data} = this.props.state;
     let renderingDom = <h3>Loading</h3>;
     if(data){
         let titleList = this.getTitlList(data);
@@ -97,8 +96,9 @@ const AppContainer = connect(mapStateToProps,mapDispatchToProps)(App);
 
 
 ReactDOM.render(
-    //provider를 통해 상위 컴포넌트에서 쉽게 store를 보낼수 있다
+
     /*
+     provider를 통해 상위 컴포넌트에서 쉽게 store를 보낼수 있다.
      렌더링 될 때 Redux 컴포넌트인 <Provider> 에 store 를 설정해주면 그 하위 컴포넌트들에 따로 parent-child 구조로 전달해주지 않아도 connect 될 때 store에 접근 할 수 있게 해줍니다.
      */
     <Provider store={store}>

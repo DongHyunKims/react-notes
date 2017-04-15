@@ -43,28 +43,19 @@ const TabPanel = function(props){
            </div>;
 };
 
+
 class Tab extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            isInit : true,
-        }
     }
 
-
-
     render(){
-
-        let state = this.props.state;
-        let buttonName = this.props.titleList;
-        let selectedKey = state.selectedKey;
-
-        let tabButton = buttonName.map((val,key)=>{
+        let {content,selectedKey} = this.props.state;
+        let {titleList} = this.props;
+        let tabButton = titleList.map((val,key)=>{
             let tabId = "tabButton_" + key;
             return (<TabButton key={key} tabName={val} tabId={tabId} onClick={this.props.tabClickHandler.bind(this,key)} selectedKey={selectedKey} currentKey={key} />);
         });
-        let content = state.content;
-
         return (
             <div className="tab_scope">
             <div className="tab_btn_scope">
@@ -72,7 +63,6 @@ class Tab extends React.Component{
             </div>
                 <TabPanel content={content}/>
             </div>
-
         )
     };
 
@@ -84,7 +74,6 @@ function mapStateToProps(state){
     };
 }
 
-
 function mapDispatchToProps(dispatch){
     return {
         tabClickHandler(key){
@@ -93,12 +82,9 @@ function mapDispatchToProps(dispatch){
         },
 
     };
-
 }
 
 const TabContainer = connect(mapStateToProps,mapDispatchToProps)(Tab);
-
-
 
 
 export default TabContainer;
