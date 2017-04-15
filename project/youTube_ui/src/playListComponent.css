@@ -1,0 +1,36 @@
+
+.play-list-block{
+    background-color: #ff6ff3;
+    flex-basis: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.video-play-block {
+    flex-basis: 25%;
+    display: flex;
+    background-color: aquamarine;
+}
+
+.video-list-block{
+    background-color: aqua;
+    flex-basis: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.play-div{
+    cursor: pointer;
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    flex-basis: 100%;
+}
+
+.thumbnail-img{
+    flex-basis: 30%;
+}
+
+.video-title{
+    flex-basis: 70%;
+}

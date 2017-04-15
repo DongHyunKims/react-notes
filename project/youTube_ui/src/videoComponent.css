@@ -1,0 +1,16 @@
+
+.video-scope {
+    height: 2500px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.video-search-block {
+    flex-basis: 5%;
+    display: flex;
+    background-color: aliceblue;
+}
+
+
