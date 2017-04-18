@@ -20,14 +20,8 @@ const youtubeSetting = {
 };
 
 
-
-
-
 const VideoSearchComponent = function (props) {
-
-
     return <div className="video-search-block" ><input type="text" id="search-input"/> <input type="button" value="검색" onClick={props.onClick}/></div>
-
 };
 
 
@@ -36,67 +30,49 @@ class VideoComponent extends Component{
         super(props);
         this.state = {
             videoList : null,
-
         };
         this.searchClickListener = this.searchClickListener.bind(this);
     }
 
     searchClickListener(event) {
-
         let q = utility.$selector("#search-input").value;
-
 
         let youtubeUrl = Object.keys(youtubeSetting).reduce((pre,post)=>{
           let query = "&" + post + "=" + youtubeSetting[post];
           return pre + query;
         },DEFAULT_URL);
 
-
         youtubeUrl += "&q=" + encodeURIComponent(q);
 
-        //console.log("youtubeUrl",youtubeUrl);
-
+        console.log("youtubeUrl",youtubeUrl);
         utility.runAjax(this.requestListener.bind(this),"GET",youtubeUrl);
 
 
     }
 
     requestListener(res){
-
-
         let jsonData = JSON.parse(res.currentTarget.responseText);
         //console.log("jsonData",jsonData);
         this.setState({videoList : jsonData});
 
-
     }
 
-
-
     render(){
-
         let state = this.state;
-
-
         let items = null;
         if(state.videoList) {
             items = state.videoList.items;
             console.log("items",items);
         }
-
         return (
 
             <div className="video-scope">
                 <VideoSearchComponent onClick={this.searchClickListener}/>
-
                 <PlayListComponent items={items} />;
-
             </div>
 
         );
     }
-
-
 }
 
 export default VideoComponent;

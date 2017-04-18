@@ -38,7 +38,6 @@ class PlayListComponent extends Component{
             selectVideo : null,
             selectedIdx : 0,
         };
-        console.log("ffff");
         this.filterItems = this.filterItems.bind(this);
     }
 
@@ -50,15 +49,10 @@ class PlayListComponent extends Component{
             };
             return itemObj;
         });
-
     }
 
-
-
     playListClickHandler(idx){
-
         let items = this.props.items;
-
         this.setState({selectVideo : items[idx], selectedIdx: idx,})
     }
 
@@ -91,12 +85,6 @@ class PlayListComponent extends Component{
             });
 
         }
-
-
-
-
-
-
 
         return (
             <div className="play-list-block">

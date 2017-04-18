@@ -1,0 +1,23 @@
+
+
+
+.album_block {
+  height: 100%;
+  flex-basis: 45%;
+  display: flex;
+  background-color: #35ffff;
+  flex-direction: column;
+
+}
+
+.video_block {
+
+  background-color: bisque;
+  flex-basis: 40%;
+
+
+}
+.album_list_block {
+  background-color: #ff5644;
+  flex-basis: 60%;
+}
