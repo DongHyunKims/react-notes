@@ -12,28 +12,38 @@ class AlbumComponent extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            selectedData : null,
+            selectedKey : 0,
+        };
+        this.albumListClickHandler = this.albumListClickHandler.bind(this);
 
+
+    }
+    albumListClickHandler(key){
+
+        let videoData = this.props.videoData;
+        this.setState({selectedData : videoData.items[key], selectedKey : key});
     }
 
     render(){
 
         let videoData = this.props.videoData;
-
-
+        let selectedData = this.state.selectedData;
 
         let opts = {
             controls : 1,
-            autoplay : 0,
+            autoplay : 1,
         };
+        console.log("selectedData",selectedData);
 
 
+        // default 사진 제공
         let youtubePlayer = <h3>Loading...</h3>;
 
-        if(videoData){
-            youtubePlayer = <YoutubePlayerComponent videoId={videoData.items[0].id.videoId} opts={opts}/>
+        if(selectedData){
+            youtubePlayer = <YoutubePlayerComponent videoId={selectedData.id.videoId} opts={opts}/>
         }
-
-
 
         //controls=0
         //autoplay=1
@@ -43,9 +53,8 @@ class AlbumComponent extends Component {
                 <div className="video_block">
                     {youtubePlayer}
                 </div>
-
                 <div className="album_list_block">
-                    <AlbumListComponent videoData={videoData} />
+                    <AlbumListComponent videoData={videoData} albumListClickHandler={this.albumListClickHandler} />
                 </div>
             </div>
         );

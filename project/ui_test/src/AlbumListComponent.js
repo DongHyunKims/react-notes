@@ -13,11 +13,9 @@ const AlbumSectionComponent = function(props){
 
     let videoSnippet = props.videoSnippet;
     let title = videoSnippet.title;
-
-
     return (
-        <div className="album_section">
-            {videoSnippet.title}
+        <div className="album_section" onClick={props.onClick}>
+            {title}
         </div>
     );
 };
@@ -33,7 +31,8 @@ class AlbumListComponent extends Component {
     }
 
     render(){
-        let{lStyle, videoData, albumListHandler } = this.props;
+        let{lStyle, videoData, albumListClickHandler } = this.props;
+        console.log("albumListClickHandler",albumListClickHandler);
 
 
         if(!lStyle){
@@ -49,15 +48,20 @@ class AlbumListComponent extends Component {
         //videoData.items[0].id.videoId
         if(videoData){
             let items = videoData.items;
-            albumSectionList = items.map((val)=>{
+            albumSectionList = items.map((val,key)=>{
                 let videoSnippet = val.snippet;
-                return  <AlbumSectionComponent key={val.id.videoId} videoSnippet={videoSnippet}/>;
+                return  <AlbumSectionComponent key={val.id.videoId} videoSnippet={videoSnippet} onClick={albumListClickHandler.bind(null,key)} />;
             });
 
         }
 
 
+/*
 
+ <div className="album_menu">
+
+ </div>
+ */
         return (
             <div className="album_list" style={lStyle}>
                 <div className="album_menu">
