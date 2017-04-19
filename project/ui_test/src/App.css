@@ -4,8 +4,8 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  display: flex;
   background-color: aqua;
+
 }
 
 .App-logo {
@@ -32,8 +32,8 @@
 
 
 .search_block{
+  float:right;
+  width:55%;
   height: 100%;
-  flex-basis: 55%;
-  display: flex;
-  background-color: aliceblue;
+  background-color: #323fff;
 }

@@ -16,10 +16,23 @@ class AlbumComponent extends Component {
     }
 
     render(){
+
+        let videoData = this.props.videoData;
+
+
+
         let opts = {
             controls : 1,
             autoplay : 0,
         };
+
+
+        let youtubePlayer = <h3>Loading...</h3>;
+
+        if(videoData){
+            youtubePlayer = <YoutubePlayerComponent videoId={videoData.items[0].id.videoId} opts={opts}/>
+        }
+
 
 
         //controls=0
@@ -28,11 +41,11 @@ class AlbumComponent extends Component {
         return (
             <div className="album_block">
                 <div className="video_block">
-                    <YoutubePlayerComponent videoId="XGSy3_Czz8k" opts={opts}/>
+                    {youtubePlayer}
                 </div>
 
                 <div className="album_list_block">
-                <AlbumListComponent  />
+                    <AlbumListComponent videoData={videoData} />
                 </div>
             </div>
         );

@@ -9,11 +9,15 @@ import "./AlbumListComponent.css";
 
 
 
+const AlbumSectionComponent = function(props){
 
-const AlbumSectionComponent = function(){
+    let videoSnippet = props.videoSnippet;
+    let title = videoSnippet.title;
+
 
     return (
         <div className="album_section">
+            {videoSnippet.title}
         </div>
     );
 };
@@ -28,34 +32,39 @@ class AlbumListComponent extends Component {
 
     }
 
-
     render(){
-
-
-        let{lStyle, albumListData, albumListHandler } = this.props;
+        let{lStyle, videoData, albumListHandler } = this.props;
 
 
         if(!lStyle){
             lStyle = {
                 width : "100%",
                 height : "100%",
-                backgroundColor : "lightgreen"
+                backgroundColor : "lightgreen",
             }
         }
 
 
-        // if(albumListData){
-        //
-        //
-        // }
+        let albumSectionList = <h2>Album에 저장된 데이터가 없습니다</h2>;
+        //videoData.items[0].id.videoId
+        if(videoData){
+            let items = videoData.items;
+            albumSectionList = items.map((val)=>{
+                let videoSnippet = val.snippet;
+                return  <AlbumSectionComponent key={val.id.videoId} videoSnippet={videoSnippet}/>;
+            });
+
+        }
+
+
 
         return (
             <div className="album_list" style={lStyle}>
                 <div className="album_menu">
 
                 </div>
-                <div className="album_section_list">
-                    <AlbumSectionComponent />
+                <div className="album_section_list" >
+                    {albumSectionList}
                 </div>
             </div>
         );
