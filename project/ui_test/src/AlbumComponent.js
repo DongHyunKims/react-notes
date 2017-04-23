@@ -14,7 +14,7 @@ class AlbumComponent extends Component {
         super(props);
         this.state = {
             selectedData : null,
-            selectedKey : 0,
+            selectedKey : -1,
         };
         this.albumListClickHandler = this.albumListClickHandler.bind(this);
 
@@ -28,8 +28,8 @@ class AlbumComponent extends Component {
 
     render(){
 
-        let videoData = this.props.videoData;
-        let selectedData = this.state.selectedData;
+        let {videoData} = this.props;
+        let {selectedData,selectedKey} = this.state;
 
         let opts = {
             controls : 1,
@@ -54,7 +54,7 @@ class AlbumComponent extends Component {
                     {youtubePlayer}
                 </div>
                 <div className="album_list_block">
-                    <AlbumListComponent videoData={videoData} albumListClickHandler={this.albumListClickHandler} />
+                    <AlbumListComponent videoData={videoData} albumListClickHandler={this.albumListClickHandler} selectedKey={selectedKey} />
                 </div>
             </div>
         );

@@ -11,11 +11,47 @@ import "./AlbumListComponent.css";
 
 const AlbumSectionComponent = function(props){
 
-    let videoSnippet = props.videoSnippet;
+    let {videoSnippet,selectedKey,idx} = props;
     let title = videoSnippet.title;
+    let iconRendering = null;
+    let alStyle = null;
+
+    if(selectedKey === idx){
+
+        alStyle = {
+            backgroundColor: "#FD0061",
+            color: "#FFFFFF",
+        };
+        iconRendering = ( <div className="eq">
+            <div className="eq__bar"></div>
+            <div className="eq__bar"></div>
+            <div className="eq__bar"></div>
+        </div> );
+    }else{
+        iconRendering = (
+            <img src="./images/Headphones-64.png" />
+        )
+    }
+
+
+    /*
+    <div className="eq">
+        <div className="eq__bar"></div>
+        <div className="eq__bar"></div>
+        <div className="eq__bar"></div>
+    </div>
+    */
+
+
+
     return (
-        <div className="album_section" onClick={props.onClick}>
-            {title}
+        <div className="album_section" onClick={props.onClick} style={alStyle}>
+            <div className="icon album_section_icon">
+                {iconRendering}
+            </div>
+            <div className="album_section_title" >
+                {title}
+            </div>
         </div>
     );
 };
@@ -31,7 +67,7 @@ class AlbumListComponent extends Component {
     }
 
     render(){
-        let{lStyle, videoData, albumListClickHandler } = this.props;
+        let{lStyle, videoData, albumListClickHandler, selectedKey} = this.props;
         console.log("albumListClickHandler",albumListClickHandler);
 
 
@@ -39,7 +75,6 @@ class AlbumListComponent extends Component {
             lStyle = {
                 width : "100%",
                 height : "100%",
-                backgroundColor : "lightgreen",
             }
         }
 
@@ -50,7 +85,7 @@ class AlbumListComponent extends Component {
             let items = videoData.items;
             albumSectionList = items.map((val,key)=>{
                 let videoSnippet = val.snippet;
-                return  <AlbumSectionComponent key={val.id.videoId} videoSnippet={videoSnippet} onClick={albumListClickHandler.bind(null,key)} />;
+                return  <AlbumSectionComponent key={val.id.videoId} videoSnippet={videoSnippet} onClick={albumListClickHandler.bind(null,key)}  selectedKey={selectedKey} idx={key}/>;
             });
 
         }
