@@ -57,8 +57,6 @@ const AlbumSectionComponent = function(props){
 };
 
 
-
-
 class AlbumListComponent extends Component {
 
     constructor(props){

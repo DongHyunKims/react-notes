@@ -12,7 +12,6 @@ class YoutubePlayerComponent extends Component{
     //youtube url 생성 메소드
     createYoutubeUrl(src){
         let opts = this.props.opts;
-
         return Object.keys(opts).reduce((pre,post)=>{
             let opt = "&" + post + "=" + opts[post];
             return pre + opt;
@@ -30,7 +29,6 @@ class YoutubePlayerComponent extends Component{
                 height: "100%",
             }
         }
-
 
         //controls=0
         //autoplay=1
